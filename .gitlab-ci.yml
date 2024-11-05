@@ -1,0 +1,20 @@
+image: node:20.17.0
+
+stages:
+  - test
+  - build
+
+test_file:
+  image: node:20.17.0
+  stage: test
+  script:
+    - echo "Error:no test specified"
+
+create_file:
+  image: node:20.17.0
+  stage: build 
+  script:
+    - npm install
+  artifacts:
+    paths:
+    - npx nodemon server.js
