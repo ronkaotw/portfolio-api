@@ -15,6 +15,7 @@ create_file:
   stage: build 
   script:
     - npm install
+    - npx nodemon 
   artifacts:
     paths:
-    - npx nodemon 
+    - public
