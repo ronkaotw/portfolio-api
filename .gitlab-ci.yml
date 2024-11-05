@@ -17,4 +17,4 @@ create_file:
     - npm install
   artifacts:
     paths:
-    - npx nodemon server.js
+    - npx nodemon 
