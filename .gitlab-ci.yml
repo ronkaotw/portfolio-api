@@ -7,12 +7,16 @@ stages:
 test_file:
   image: node:20.17.0
   stage: test
+  tags:
+    - self-hosted 
   script:
     - echo "Error:no test specified"
 
 create_file:
   image: node:20.17.0
   stage: build 
+  tags:
+    - self-hosted
   script:
     - npm install
     - npx nodemon
