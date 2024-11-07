@@ -1,12 +1,13 @@
 [build]
   command = "npm install"
-  base = "/"
+  publish = "public"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/server/:splat"
+  to = "/.netlify/functions/lambda/:splat"
   status = 200
-  
+
 [functions]
+  directory = "."
   node_bundler = "esbuild"
-  external_node_modules = ["express"]
+  external_node_modules = ["express", "serverless-http"]
