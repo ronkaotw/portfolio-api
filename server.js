@@ -1,16 +1,18 @@
 const express = require('express');
 const app = express();
+// deployment
+const serverless = require('serverless-http')
 // const host = '127.0.0.1'   //無法使用
 const port = 3000
 const morgan = require('morgan');
 // api 引入
-const apiResume = require('./routes/resume.js');
-const apiContact = require('./routes/contact.js');
-const apiPorfolio = require('./routes/portfolios.js');
-const apiAbout = require('./routes/abouts.js');
-const apiUser = require('./routes/users.js');
+const apiResume = require('./src/resume.js');
+const apiContact = require('./src/contact.js');
+const apiPorfolio = require('./src/portfolios.js');
+const apiAbout = require('./src/abouts.js');
+const apiUser = require('./src/users.js');
 // 引入db config設定
-const db = require('./config/db.js'); 
+const db = require('../config/db.js'); 
 
 // 同步時使用，引入資料庫 Model
     // require('./models/Users.js');
@@ -46,12 +48,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
- app.use('/users', apiUser);
- app.use('/about', apiAbout);
- app.use('/portfolio', apiPorfolio);
- app.use('/contact', apiContact);
- app.use('/resume', apiResume);
- app.use('/', (req,res) => {
+ app.use('/.netlify/functions/users', apiUser);
+ app.use('/.netlify/functions/about', apiAbout);
+ app.use('/.netlify/functions/portfolio', apiPorfolio);
+ app.use('/.netlify/functions/contact', apiContact);
+ app.use('/.netlify/functions/resume', apiResume);
+
+ app.use('/.netlify/functions/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
         "version": "1.0.0",
@@ -62,7 +65,3 @@ app.use(morgan('Aaron'));
 app.listen(port, () => {
     console.log(`伺服器啟動在 http://localhost :${port}`);
 });
-
-// ${host}
-
-module.exports = app
