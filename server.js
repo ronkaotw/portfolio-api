@@ -1,9 +1,10 @@
+// deployment
+const serverless = require('serverless-http');
+// express
 const express = require('express');
 const app = express();
-// deployment
-const serverless = require('serverless-http')
 // const host = '127.0.0.1'   //無法使用
-const port = 3000
+// const port = 9000
 const morgan = require('morgan');
 // api 引入
 const apiResume = require('./src/resume.js');
@@ -48,20 +49,23 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
- app.use('/.netlify/functions/users', apiUser);
- app.use('/.netlify/functions/about', apiAbout);
- app.use('/.netlify/functions/portfolio', apiPorfolio);
- app.use('/.netlify/functions/contact', apiContact);
- app.use('/.netlify/functions/resume', apiResume);
+ app.use('/.netlify/functions/api/users', apiUser);
+ app.use('/.netlify/functions/api/about', apiAbout);
+ app.use('/.netlify/functions/api/portfolio', apiPorfolio);
+ app.use('/.netlify/functions/api/contact', apiContact);
+ app.use('/.netlify/functions/api/resume', apiResume);
 
- app.use('/.netlify/functions/', (req,res) => {
+ app.use('/.netlify/functions/api/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
         "version": "1.0.0",
     })
 })
 
-// 啟動伺服器
-app.listen(port, () => {
-    console.log(`伺服器啟動在 http://localhost :${port}`);
-});
+
+// // 啟動伺服器
+// app.listen(port, () => {
+//     console.log(`伺服器啟動在 http://localhost :${port}`);
+// });
+
+module.exports.handler = serverless(app)
