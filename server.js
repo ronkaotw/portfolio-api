@@ -55,7 +55,7 @@ app.use(morgan('Aaron'));
  app.use('/.netlify/functions/api/contact', apiContact);
  app.use('/.netlify/functions/api/resume', apiResume);
 
- app.use('/.netlify/functions/api/', (req,res) => {
+ app.use('/.netlify/functions/api', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
         "version": "1.0.0",
