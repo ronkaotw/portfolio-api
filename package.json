@@ -4,8 +4,7 @@
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
-    "start": "netlify-lambda serve src",
-    "build": "netlify-lambda build src"
+    "start": "nodemon server.js"
   },
   "author": "Aaron",
   "license": "ISC",
@@ -15,11 +14,9 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "netlify-lambda": "^2.0.16",
     "nodemon": "^3.1.7",
     "pg": "^8.13.0",
     "sequelize": "^6.37.4",
-    "serverless-http": "^3.2.0",
     "sqlite3": "^5.1.7"
   }
 }
