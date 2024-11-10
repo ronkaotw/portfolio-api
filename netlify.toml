@@ -2,7 +2,7 @@
   command = "npm run build"
   functions = "functions"
 
-[[reditects]]
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
