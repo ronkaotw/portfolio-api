@@ -1,18 +1,16 @@
 const express = require('express');
-const serverless = require('serverless-http');
-const { handler } = require('@netlify/functions');
 const app = express();
 // const host = '127.0.0.1'   //無法使用
-// const port = 3000
+const port = 3000
 const morgan = require('morgan');
 // api 引入
-const apiResume = require('./routes/resume.js');
-const apiContact = require('./routes/contact.js');
-const apiPorfolio = require('./routes/portfolios.js');
-const apiAbout = require('./routes/abouts.js');
-const apiUser = require('./routes/users.js');
+const apiResume = require('./public/routes/resume.js');
+const apiContact = require('./public/routes/contact.js');
+const apiPorfolio = require('./public/routes/portfolios.js');
+const apiAbout = require('./public/routes/abouts.js');
+const apiUser = require('./public/routes/users.js');
 // 引入db config設定
-const db = require('../config/db.js'); 
+const db = require('./public/config/db.js'); 
 
 // 同步時使用，引入資料庫 Model
     // require('./models/Users.js');
@@ -66,5 +64,3 @@ app.listen(port, () => {
 });
 
 // ${host}
-
-exports.handler = serverless(app);
