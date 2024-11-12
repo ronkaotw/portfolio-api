@@ -4,7 +4,7 @@
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
-    "build": "express node --output public",
+    "build": "express npm run build --output public",
     "server": "nodemon server.js"
   },
   "author": "Aaron",
