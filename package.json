@@ -4,8 +4,8 @@
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
-    "build": "express npm run build --output public",
-    "server": "nodemon server.js"
+    "build": "npm install",
+    "server": "npm run start"
   },
   "author": "Aaron",
   "license": "ISC",
