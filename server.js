@@ -46,13 +46,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
- app.use('/.netlify/functions/api/users', apiUser);
- app.use('/.netlify/functions/api/about', apiAbout);
- app.use('/.netlify/functions/api/portfolio', apiPorfolio);
- app.use('/.netlify/functions/api/contact', apiContact);
- app.use('/.netlify/functions/api/resume', apiResume);
+ app.use('/users', apiUser);
+ app.use('/about', apiAbout);
+ app.use('/portfolio', apiPorfolio);
+ app.use('/contact', apiContact);
+ app.use('/resume', apiResume);
 
- app.use('/netlify/functions/api/', (req,res) => {
+ app.use('/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
         "version": "1.0.0",
