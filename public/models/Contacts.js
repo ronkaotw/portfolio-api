@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('aaron_portfolio', 'postgres', 'postgres', {
-  host: '127.0.0.1',
+const sequelize = new Sequelize('postgres://default:ShoBm12iDkxK@ep-purple-recipe-a43d60u8-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require', {
+  // host: '127.0.0.1',
   dialect: 'postgres',
 });
 
