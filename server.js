@@ -13,11 +13,11 @@ const apiUser = require('./public/routes/users.js');
 const db = require('./public/config/db.js'); 
 
 // 同步時使用，引入資料庫 Model
-    // require('./models/Users.js');
-    // require('./models/Abouts.js');
-    // require('./models/Portfolio.js');
-    // require('./models/Contacts.js')
-    // require('./models/resume.js')
+    require('./public/models/Users.js');
+    require('./public/models/Abouts.js');
+    require('./public/models/Portfolio.js');
+    require('./public/models/Contacts.js')
+    require('./public/models/resume.js')
 
 
 // 與資料庫進行連線
