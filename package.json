@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "aaron-portfolio-api",
   "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon server.js"
   },
   "author": "Aaron",
   "license": "ISC",
