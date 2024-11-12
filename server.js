@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 // const host = '127.0.0.1'   //無法使用
-const port = 3000
+// const port = 3000
 const morgan = require('morgan');
 // api 引入
 const apiResume = require('./public/routes/resume.js');
@@ -58,9 +58,12 @@ app.use(morgan('Aaron'));
         "version": "1.0.0",
     })
 })
+
+module.exports = app;
+
 // 啟動伺服器
-app.listen(port, () => {
-    console.log(`伺服器啟動在 http://localhost :${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`伺服器啟動在 http://localhost :${port}`);
+// });
 
 // ${host}
