@@ -4,8 +4,8 @@
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
-    "build": "npm install",
-    "server": "npm run start"
+    "server": "npm run start",
+    "build": "webpack --mode production"
   },
   "author": "Aaron",
   "license": "ISC",
