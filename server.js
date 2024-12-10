@@ -3,7 +3,6 @@ const app = express();
 // const host = '127.0.0.1'   //無法使用
 // const port = 3000
 const morgan = require('morgan');
-const cors = require('cors');
 // api 引入
 const apiResume = require('./public/routes/resume.js');
 const apiContact = require('./public/routes/contact.js');
@@ -35,15 +34,6 @@ async function connDB() {
   } 
   connDB();
 
- const corsOption = {
-    origin: [
-        'https://www.example.com',
-        'http://localhost:3001',
-      ],
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-      allowedHeaders: ['Content-Type', 'Authorization'],
- }
-
 // 中介軟體使用
  //morgan  
  morgan.format('Aaron','[Aaron] :method :url :status'),
@@ -52,7 +42,6 @@ async function connDB() {
  })
  
 // 中介軟體執行 
-app.use(cors(corsOption));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
