@@ -45,7 +45,17 @@ async function connDB() {
 // 中介軟體執行 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-app.use(cors());
+const corsOptions = {
+    origin: [
+      'https://www.api.ronkao.tw',
+      'https://www.ronkao.tw',
+      'http://localhost:5173',
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  };
+  
+app.use(cors(corsOptions));
 app.use(morgan('Aaron'));
  // API 執行
  app.use('/users', apiUser);
