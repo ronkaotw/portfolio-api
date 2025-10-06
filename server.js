@@ -5,20 +5,20 @@ const port = 3000
 const morgan = require('morgan');
 const cors = require('cors')
 // api 引入
-const apiResume = require('./api/routes/resume.js');
-const apiContact = require('./api/routes/contact.js');
-const apiPorfolio = require('./api/routes/portfolios.js');
-const apiAbout = require('./api/routes/abouts.js');
-const apiUser = require('./api/routes/users.js');
+const apiResume = require('./api/resume.js');
+const apiContact = require('./api/contact.js');
+const apiPorfolio = require('./api/portfolios.js');
+const apiAbout = require('./api/abouts.js');
+const apiUser = require('./api/users.js');
 // 引入db config設定
-const db = require('./api/config/db.js'); 
+const db = require('./utils/db.js'); 
 
 // 同步時使用，引入資料庫 Model
-    // require('./api/models/Users.js');
-    // require('./api/models/Abouts.js');
-    // require('./api/models/Portfolio.js');
-    // require('./api/models/Contacts.js')
-    // require('./api/models/resume.js')
+    // require('./models/Users.js');
+    // require('./models/Abouts.js');
+    // require('./models/Portfolio.js');
+    // require('./models/Contacts.js')
+    // require('./models/resume.js')
 
 
 // 與資料庫進行連線
