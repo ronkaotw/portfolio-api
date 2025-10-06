@@ -3,7 +3,7 @@ const app = express();
 // const host = '127.0.0.1'   //無法使用
 // const port = 3000
 const morgan = require('morgan');
-// const cors = require('cors')
+const cors = require('cors')
 // api 引入
 const apiResume = require('./public/routes/resume.js');
 const apiContact = require('./public/routes/contact.js');
@@ -48,11 +48,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
-//  app.use(cors({
-//   origin: 'http://localhost:9000'
-//   methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-//   allowedHeaders: ['Content-Type','Authorization']
-// }))
+ app.use(cors({
+  origin: 'http://localhost:9000'
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}))
  app.use('/users', apiUser);
  app.use('/about', apiAbout);
  app.use('/portfolio', apiPorfolio);
