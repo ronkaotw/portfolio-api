@@ -62,7 +62,7 @@ app.use(morgan('Aaron'));
  app.use('/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
-        "version": "1.8.4",
+        "version": "1.8.5",
     })
 })
 

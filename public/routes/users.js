@@ -7,21 +7,21 @@ const bcrypt = require('bcryptjs');
 const Users = require('../config/db.js')
 
 router.post('/Login',async (req,res)=>{
-    // 輸入登入帳號
-    const loginInput = {
-        username: req.body.username,
-        password: req.body.password
-    }
-
-    // 檢查 username 和 password 是否存在
-    if (!loginInput.username || !loginInput.password) {
-        return res.status(401).json({ 
-            status: 401,
-            error: "操作失敗：請輸入帳號和密碼" 
-        });
-    }
-    
     try {
+        // 輸入登入帳號
+        const loginInput = {
+            username: req.body.username,
+            password: req.body.password
+        }
+
+        // 檢查 username 和 password 是否存在
+        if (!loginInput.username || !loginInput.password) {
+            return res.status(401).json({ 
+                status: 401,
+                error: "操作失敗：請輸入帳號和密碼" 
+            });
+        }
+
         // 判斷密碼是否正確
         const findUserPwd = await Users.client.query(`SELECT * FROM "Users" WHERE username = $1`,[loginInput.username]);
 
