@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 // const host = '127.0.0.1'   //無法使用
 // const port = 3000
-const cors = require('cors');
 const morgan = require('morgan');
 // api 引入
 const apiResume = require('./public/routes/resume.js');
@@ -45,12 +44,6 @@ async function connDB() {
 // 中介軟體執行 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-const corsOptions ={
-    origin:'http://localhost:5173', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 app.use(morgan('Aaron'));
  // API 執行
  app.use('/users', apiUser);
