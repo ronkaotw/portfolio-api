@@ -36,7 +36,10 @@ router.post('/Login',async (req,res)=>{
 
     
         // 比對帳號與密碼是否正確
-        const findUserAccount = await Users.client.query(`SELECT * FROM  "Users" WHERE username = $1`,[loginInput]);
+        const findUserAccount = await Users.client.query(
+            `SELECT * FROM "Users" WHERE username = $1`,
+            [loginInput]
+        );
     
         let loginOutput = {
             username:req.body.username,
@@ -51,11 +54,11 @@ router.post('/Login',async (req,res)=>{
         }
 
 
-        if(loginInput.username !== loginInput.password && loginInput.password !== comparePwd){
-            return res.status(401).json({
-                status: 401,
-                error: "操作失敗：帳號或密碼錯誤！"
-            })
+        if(!comparePwd){
+          return res.status(401).json({
+            status: 401,
+            error: "操作失敗：帳號或密碼錯誤！"
+          });
         }else{
             const Token = jwt.sign({ id: findUserAccount.id }, `process.env.JWT_SECRET`, {
                 expiresIn: '1h',
