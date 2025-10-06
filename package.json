@@ -4,8 +4,8 @@
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
-    "server": "npm run start",
-    "build": "npm install --output public"
+    "build": "npm install",
+    "server": "node server.js"
   },
   "author": "Aaron",
   "license": "ISC",
