@@ -14,11 +14,11 @@ const apiUser = require('./public/routes/users.js');
 const db = require('./public/config/db.js'); 
 
 // 同步時使用，引入資料庫 Model
-    require('./public/models/Users.js');
-    require('./public/models/Abouts.js');
-    require('./public/models/Portfolio.js');
-    require('./public/models/Contacts.js')
-    require('./public/models/resume.js')
+    // require('./public/models/Users.js');
+    // require('./public/models/Abouts.js');
+    // require('./public/models/Portfolio.js');
+    // require('./public/models/Contacts.js')
+    // require('./public/models/resume.js')
 
 
 // 與資料庫進行連線
@@ -49,7 +49,7 @@ app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
  app.use(cors({
-  origin: 'http://localhost:9000', 'https://admin.ronkao.tw'// 你的前端 URL
+  origin: 'http://localhost:9000'
   methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
 }))
@@ -62,7 +62,7 @@ app.use(morgan('Aaron'));
  app.use('/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
-        "version": "1.8.3",
+        "version": "1.8.4",
     })
 })
 
