@@ -5,13 +5,13 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors')
 // api 引入
-const apiResume = require('./public/routes/resume.js');
-const apiContact = require('./public/routes/contact.js');
-const apiPorfolio = require('./public/routes/portfolios.js');
-const apiAbout = require('./public/routes/abouts.js');
-const apiUser = require('./public/routes/users.js');
+const apiResume = require('./api/routes/resume.js');
+const apiContact = require('./api/routes/contact.js');
+const apiPorfolio = require('./api/routes/portfolios.js');
+const apiAbout = require('./api/routes/abouts.js');
+const apiUser = require('./api/routes/users.js');
 // 引入db config設定
-const db = require('./public/config/db.js'); 
+const db = require('./api/config/db.js'); 
 
 // 同步時使用，引入資料庫 Model
     // require('./public/models/Users.js');
@@ -62,7 +62,7 @@ app.use(morgan('Aaron'));
  app.use('/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
-        "version": "1.8.5",
+        "version": "1.8.6",
     })
 })
 

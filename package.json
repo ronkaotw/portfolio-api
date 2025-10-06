@@ -1,6 +1,6 @@
 {
   "name": "portfolio-api",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "aaron-portfolio-api",
   "main": "server.js",
   "scripts": {
