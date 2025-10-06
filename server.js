@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-// const host = '127.0.0.1'   //無法使用
-// const port = 3000
+const host = '127.0.0.1'
+const port = 3000
 const morgan = require('morgan');
 const cors = require('cors')
 // api 引入
@@ -66,11 +66,12 @@ app.use(morgan('Aaron'));
     })
 })
 
+// 啟動伺服器
+app.listen(port, () => {
+    console.log(`${host}:${port}`);
+});
+
 module.exports = app;
 
-// 啟動伺服器
-// app.listen(port, () => {
-//     console.log(`伺服器啟動在 http://localhost :${port}`);
-// });
 
-// ${host}
+
