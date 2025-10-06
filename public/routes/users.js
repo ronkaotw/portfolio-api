@@ -6,81 +6,75 @@ const bcrypt = require('bcryptjs');
 // 引入 Model 模型
 const Users = require('../config/db.js')
 
-router.post('/Login',async (req,res)=>{
-    // 輸入登入帳號
-    const loginInput = {
-        username: req.body.username,
-        password: req.body.password
-    }
-
-    // 檢查 username 和 password 是否存在
-    if (!loginInput.username || !loginInput.password) {
-        return res.status(401).json({ 
-            status: 401,
-            error: "操作失敗：請輸入帳號和密碼" 
-        });
-    }
-    
+router.post('/Login', async (req, res) => {
     try {
-        // 判斷密碼是否正確
-        const findUserPwd = await Users.client.query(`SELECT * FROM "Users" WHERE username = $1`,[loginInput.username]);
+        // 輸入登入帳號
+        const loginInput = {
+            username: req.body.username,
+            password: req.body.password
+        }
 
-        if(!findUserPwd){
-            return res.status(404).json({ 
-                status: 404,
-                error: "操作失敗：使用者未找到" 
+        // 檢查 username 和 password 是否存在
+        if (!loginInput.username || !loginInput.password) {
+            return res.status(401).json({
+                status: 401,
+                error: "操作失敗：請輸入帳號和密碼"
             });
         }
 
-        const comparePwd = await bcrypt.compare(loginInput.password, findUserPwd.rows[0].password );
+        // 判斷密碼是否正確
+        const findUserPwd = await Users.client.query(`SELECT * FROM "Users" WHERE username = $1`, [loginInput.username]);
 
-    
+        if (!findUserPwd) {
+            return res.status(404).json({
+                status: 404,
+                error: "操作失敗：使用者未找到"
+            });
+        }
+
+        const comparePwd = await bcrypt.compare(loginInput.password, findUserPwd.rows[0].password);
+
         // 比對帳號與密碼是否正確
         const findUserAccount = await Users.client.query(
             `SELECT * FROM "Users" WHERE username = $1`,
-            [loginInput]
+            [loginInput.username]
         );
-    
+
         let loginOutput = {
-            username:req.body.username,
+            username: req.body.username,
         }
 
         // 判斷帳號密碼格式
-        if(loginInput == ""){ 
+        if (loginInput == "") {
             return res.status(401).json({
                 status: 401,
                 error: "操作失敗：帳號密碼格式不正確"
             });
         }
 
-
-        if(!comparePwd){
-          return res.status(401).json({
-            status: 401,
-            error: "操作失敗：帳號或密碼錯誤！"
-          });
-        }else{
-            const Token = jwt.sign({ id: findUserAccount.id }, `process.env.JWT_SECRET`, {
+        if (!comparePwd) {
+            return res.status(401).json({
+                status: 401,
+                error: "操作失敗：帳號或密碼錯誤！"
+            });
+        } else {
+            const Token = jwt.sign({ id: findUserAccount.id }, process.env.JWT_SECRET, {
                 expiresIn: '1h',
             });
-    
+
             return res.status(200).json({
                 status: 200,
-                data:{
-                    loginOutput
-                },
+                data: { loginOutput },
                 Token
-            })
+            });
         }
     } catch (error) {
-        console.error(error)
+        console.error(error);
         return res.status(500).json({
             status: 500,
             error: "內部伺服器錯誤"
         });
-        
     }
-   
 });
 // 需要權限才可進行操作
 router.get('/', async (req,res) => {
