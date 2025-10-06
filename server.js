@@ -3,6 +3,7 @@ const app = express();
 // const host = '127.0.0.1'   //無法使用
 // const port = 3000
 const morgan = require('morgan');
+const cors = require('cors')
 // api 引入
 const apiResume = require('./public/routes/resume.js');
 const apiContact = require('./public/routes/contact.js');
@@ -42,10 +43,16 @@ async function connDB() {
  })
  
 // 中介軟體執行 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(morgan('Aaron'));
  // API 執行
+ app.use(cors({
+  origin: 'http://localhost:9000', 'https://admin.ronkao.tw'// 你的前端 URL
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}))
  app.use('/users', apiUser);
  app.use('/about', apiAbout);
  app.use('/portfolio', apiPorfolio);
@@ -55,7 +62,7 @@ app.use(morgan('Aaron'));
  app.use('/', (req,res) => {
     res.status(200).json({
         "name": "portfolio-api",
-        "version": "1.0.0",
+        "version": "1.8.3",
     })
 })
 
