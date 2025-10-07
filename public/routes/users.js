@@ -10,12 +10,12 @@ router.post('/Login', async (req, res) => {
     try {
         // 輸入登入帳號
         const loginInput = {
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password
         }
 
-        // 檢查 username 和 password 是否存在
-        if (!loginInput.username || !loginInput.password) {
+        // 檢查 email 和 password 是否存在
+        if (!loginInput.email || !loginInput.password) {
             return res.status(401).json({
                 status: 401,
                 error: "操作失敗：請輸入帳號和密碼"
@@ -23,7 +23,7 @@ router.post('/Login', async (req, res) => {
         }
 
         // 判斷密碼是否正確
-        const findUserPwd = await Users.client.query(`SELECT * FROM "Users" WHERE username = $1`, [loginInput.username]);
+        const findUserPwd = await Users.client.query(`SELECT * FROM "Users" WHERE email = $1`, [loginInput.email]);
 
         if (!findUserPwd) {
             return res.status(404).json({
@@ -36,12 +36,12 @@ router.post('/Login', async (req, res) => {
 
         // 比對帳號與密碼是否正確
         const findUserAccount = await Users.client.query(
-            `SELECT * FROM "Users" WHERE username = $1`,
-            [loginInput.username]
+            `SELECT * FROM "Users" WHERE email = $1`,
+            [loginInput.email]
         );
 
         let loginOutput = {
-            username: req.body.username,
+            email: req.body.email,
         }
 
         // 判斷帳號密碼格式
@@ -103,7 +103,7 @@ router.get('/', async (req,res) => {
         }else{
             // 取得所有使用者資料
             const getUserAllAct = userFind.rows.map(user => ({
-                username: user.username,
+                email: user.email,
                 password: user.password,
                 roles: user.roles
             }));
@@ -130,16 +130,16 @@ router.post('/',async(req, res) => {
 
         // 新增一筆使用者，讀取資料
         const createUser = {
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password,
             roles: req.body.roles
         }
 
         // 尋找資料庫內的檔案 
-        const userFind = await Users.client.query(`SELECT * FROM "Users" WHERE username = $1`, [createUser.username]);
+        const userFind = await Users.client.query(`SELECT * FROM "Users" WHERE email = $1`, [createUser.email]);
     
         // 找不到伺服器資料
-        if(userFind.username === 0){
+        if(userFind.email === 0){
             return res.status(404).json({
                 status: 404,
                 error: "操作失敗：找不到資料",
@@ -154,18 +154,18 @@ router.post('/',async(req, res) => {
                 error: "操作失敗：您的權限不足！"
             })
         }else{
-            // username 格式錯誤
-            if(createUser.username === "" && createUser.password === ""){
+            // email 格式錯誤
+            if(createUser.email === "" && createUser.password === ""){
                 return res.status(401).json({
                     status:401,
                     error:"操作失敗：帳號格式不正確！"
             })
             }else{
-                await Users.client.query(`INSERT INTO "Users" ("username", "password", "roles", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5) `, [
-                    createUser.username, hashedPassword, createUser.roles, new Date(), new Date()]);
+                await Users.client.query(`INSERT INTO "Users" ("email", "password", "roles", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5) `, [
+                    createUser.email, hashedPassword, createUser.roles, new Date(), new Date()]);
     
                 const newUser = {
-                    username: req.body.username,
+                    email: req.body.email,
                     password: hashedPassword,
                     roles: req.body.roles
     
